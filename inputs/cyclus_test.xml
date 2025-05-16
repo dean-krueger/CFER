@@ -1,0 +1,136 @@
+<simulation>
+  <control>
+    <duration>10</duration>
+    <startmonth>1</startmonth>
+    <startyear>2000</startyear>
+  </control>
+
+  <archetypes>
+    <spec><lib>cycamore</lib><name>Source</name></spec>
+    <spec><lib>cycamore</lib><name>Sink</name></spec>
+    <spec><lib>cycamore</lib><name>DeployInst</name></spec>
+    <spec><lib>agents</lib><name>NullInst</name></spec>
+    <spec><lib>agents</lib><name>NullRegion</name></spec>
+  </archetypes>
+
+  <!--Start of the Recipe Section (REQUIRED)-->
+  <recipe>
+    <name>Toast</name>
+    <basis>atom</basis>
+    <nuclide>
+        <id>10030000</id> <!--Spicy Toast...-->
+        <comp>1</comp>
+    </nuclide>
+  </recipe>
+
+
+  <!-- Start of the Facility Section (REQUIRED)-->
+  <facility>
+    <name>Cheap Bakery</name>
+    <config>
+        <Source>
+            <outcommod>Toast</outcommod>
+            <capital_cost>300000.0</capital_cost>
+            <operations_and_maintenance>50000.0</operations_and_maintenance>
+            <facility_operational_lifetime>20</facility_operational_lifetime>
+            <facility_taxable_lifetime>11</facility_taxable_lifetime>
+            <per_unit_labor_cost>1.50</per_unit_labor_cost>
+            <throughput>8334</throughput>
+        </Source>
+    </config>
+  </facility>
+
+    <facility>
+    <name>Expensive Bakery</name>
+    <config>
+        <Source>
+            <outcommod>Toast</outcommod>
+            <capital_cost>100000.0</capital_cost>
+            <operations_and_maintenance>50000.0</operations_and_maintenance>
+            <facility_operational_lifetime>20</facility_operational_lifetime>
+            <facility_taxable_lifetime>11</facility_taxable_lifetime>
+            <per_unit_labor_cost>1.50</per_unit_labor_cost>
+            <throughput>8334</throughput>
+            <cost_override>3.14</cost_override>
+        </Source>
+    </config>
+  </facility>
+
+  <facility>
+    <name>Insane Bakery</name>
+    <config>
+        <Source>
+            <outcommod>Toast</outcommod>
+        </Source>
+    </config>
+  </facility>
+
+  <facility>
+    <name>Bread Store</name>
+    <config>
+        <Sink>
+            <in_commods>
+            <val>Toast</val>
+            </in_commods>
+            <capacity>1000</capacity>
+        </Sink>
+    </config>
+  </facility>
+
+  <region>
+    <name>OneRegion</name>
+    <config> <NullRegion /> </config>
+    <institution>
+      <name>OneInst</name>
+      <initialfacilitylist>
+        <entry>
+          <prototype>Cheap Bakery</prototype>
+          <number>0</number>
+        </entry>
+        <entry>
+          <prototype>Expensive Bakery</prototype>
+          <number>0</number>
+        </entry>
+        <entry>
+          <prototype>Bread Store</prototype>
+          <number>0</number>
+        </entry>
+      </initialfacilitylist>
+      <config> 
+        <DeployInst> 
+          <prototypes>
+            <val>Cheap Bakery</val>
+            <val>Expensive Bakery</val>
+            <val>Bread Store</val>
+          </prototypes>
+          <build_times>
+            <val>-1</val>
+            <val>-1</val>
+            <val>-1</val>
+          </build_times>
+          <n_build>
+            <val>1</val>
+            <val>1</val>
+            <val>1</val>
+          </n_build>
+          <minimum_acceptable_return_rate>0.12</minimum_acceptable_return_rate>
+          <corporate_income_tax_rate>0.05</corporate_income_tax_rate>
+          <depreciation_constant>0.2</depreciation_constant>
+        </DeployInst>
+      </config>
+    </institution>
+    <institution>
+      <name>TwoInst</name>
+      <initialfacilitylist>
+        <entry>
+          <prototype>Insane Bakery</prototype>
+          <number>1</number>
+        </entry>
+      </initialfacilitylist>
+      <config>
+      <NullInst/>
+    </config>
+    </institution>
+  </region>
+
+</simulation>

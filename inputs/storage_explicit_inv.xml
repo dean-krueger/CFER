@@ -1,0 +1,104 @@
+<simulation>
+  <control>
+    <duration>100</duration>
+    <startmonth>1</startmonth>
+    <startyear>2000</startyear>
+    <decay>lazy</decay>
+    <explicit_inventory>true</explicit_inventory>
+  </control>
+
+  <archetypes>
+    <spec><lib>cycamore</lib><name>Source</name></spec>
+    <spec><lib>cycamore</lib><name>Storage</name></spec>
+    <spec><lib>cycamore</lib><name>Sink</name></spec>
+    <spec><lib>cycamore</lib><name>DeployInst</name></spec>
+    <spec><lib>agents</lib><name>NullRegion</name></spec>
+  </archetypes>
+
+  <!--Start of the Recipe Section (REQUIRED)-->
+  <recipe>
+    <name>Toast</name>
+    <basis>atom</basis>
+    <nuclide>
+        <id>10030000</id> <!--Spicy Toast...-->
+        <comp>1</comp>
+    </nuclide>
+  </recipe>
+
+
+  <!-- Start of the Facility Section (REQUIRED)-->
+  <facility>
+    <name>Bakery</name>
+    <config>
+        <Source>
+            <outcommod>Toast</outcommod>
+            <throughput>100</throughput>
+        </Source>
+    </config>
+  </facility>
+
+    <facility>
+    <name>Warehouse</name>
+    <config>
+        <Storage>
+            <in_commods>
+              <val>Toast</val>
+            </in_commods>
+            <out_commods>
+              <val>Toast</val>
+            </out_commods>
+            <throughput>10</throughput>
+        </Storage>
+    </config>
+  </facility>
+  
+  <facility>
+    <name>DuckPond</name>
+    <config>
+      <Sink>
+        <in_commods>
+          <val>Toast</val>
+        </in_commods>
+      </Sink>
+    </config>
+  </facility>
+
+  <region>
+    <name>OneRegion</name>
+    <config> <NullRegion /> </config>
+    <institution>
+      <name>OneInst</name>
+      <initialfacilitylist>
+          <entry>
+            <prototype>Bakery</prototype>
+            <number>1</number>
+         </entry>
+      </initialfacilitylist>
+      <config> 
+        <DeployInst> 
+          <prototypes>
+            <val>Bakery</val>
+            <val>Warehouse</val>
+            <val>DuckPond</val>
+          </prototypes>
+          <build_times>
+            <val>1</val>
+            <val>1</val>
+            <val>1</val>
+          </build_times>
+          <lifetimes>
+            <val>100</val>
+            <val>100</val>
+            <val>100</val>
+          </lifetimes>
+          <n_build>
+            <val>1</val>
+            <val>1</val>
+            <val>1</val>
+          </n_build>
+        </DeployInst>
+      </config>
+    </institution>
+  </region>
+
+</simulation>
